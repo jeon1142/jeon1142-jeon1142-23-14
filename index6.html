@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A Memory Microscope</title>
+    <style>
+        @font-face {
+            font-family: 'ChosunSm';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.1/ChosunSm.woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #EEEEEE;
+            position: relative;
+            overflow: hidden;
+            cursor: url('m.png'), auto;
+        }
+
+        #a, #b, #c, #d, #e, #f, #g, #h {
+        cursor: url('mh.png'), pointer;
+    }
+
+        .container {
+            width: 1700px;
+            height: 900px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            background-color: #EEEEEE;
+            border: 0.25px solid black;
+        }
+
+
+        .box {
+            background-color: #EEEEEE;
+            border: 0.25px solid black;
+            transition: background-color 0.3s ease;
+        }
+
+        .box:hover {
+            background-color: black;
+        }
+
+
+        .box2 {
+            background-color: #EEEEEE;
+            border: 0.25px solid black;
+        }
+
+         .box3 {
+            background-color: #EEEEEE;
+            border: 0.25px solid black;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+        }
+
+        .box3 .box {
+            background-color: #EEEEEE;
+            border: 0.25px solid black;
+            transition: background-color 0.3s ease;
+        }
+
+        .box3 .box:hover {
+            background-color: black;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: black;
+/*            text-align: center;*/
+            font-size: 50px;
+            margin-top: 38px;
+        }
+
+        p {
+            font-family: 'ChosunSm';
+            text-align: left;
+            color: black;
+            transition: color 0.3s ease;
+        }
+
+
+        .sub_t {
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+
+        .box:hover p {
+            color: white;
+        }
+
+         .box:hover h1 {
+            color: white;
+        }
+
+        .p{
+            margin-left: 30px;
+
+        }
+
+        .p1{
+            margin-top: 30px;
+            margin-left: 30px;
+        }
+
+        #canv {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+
+
+
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id='canv'></canvas>
+    <a href="index.html">
+            <img src="snowman_black.png" class="h" style="width: 50px; position: absolute; top: 120px; left: 200px; z-index: 100;" >
+        </a>
+    <div class="container">
+        <div style="width: 1250px; text-align: center;">
+        	
+        <!-- ------------- -->
+
+           <div class="picture" style="position: relative;">
+        <img src="pebble.png" class="picture" style="display: block; margin: auto; padding-top: 50px; width: 800px; height: 800px;">
+        <img src="pebble_b.png" class="carrot-back" style="display: block; margin: auto; padding-top: 50px; width: 800px; height: 800px; position: absolute; top: 0; left: 0;  padding-left: 225px;">
+        
+        <div class="cursor" ></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+        <script>
+            const cursor = document.querySelector(".cursor");
+            const carrotBack = document.querySelector(".carrot-back");
+            const picture = document.querySelector(".picture");
+
+            function follow(e) {
+                gsap.to(cursor, {
+                    duration: 0.3,
+                    left: e.pageX - cursor.offsetWidth / 2,
+                    top: e.pageY - cursor.offsetHeight / 2
+                });
+
+                const rect = picture.getBoundingClientRect();
+                const mouseX = e.pageX - rect.left;
+                const mouseY = e.pageY - rect.top;
+
+                carrotBack.style.clipPath = `circle(65px at ${mouseX}px ${mouseY}px)`;
+            }
+
+            document.querySelector('.picture').addEventListener("mousemove", follow);
+        </script>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ------------------ -->
+        </div>
+        <div style="width: 450px;">
+        	<div class="box" style="height: 149px; display: block; margin: 0; padding-left: 30px;">
+           <h1>Pebble</h1>
+            </div>
+        	<div class="box" style="height:429px;">
+                <p class="p1">집에 있던 수족관 속에 장식되어 있던 조약돌을 가져온 아이.</p>
+                <p class="p">아직 물기가 마르지 않아 촉촉하다. 항상 수족관에 손을</p>
+                <p class="p">넣어 보고 싶었던 아이는 눈사람 장식을 핑계로 버킷리스트를</p>
+                <p class="p">실천하였다. 수족관에서 평생 물 속에서 가라앉아 있었던</p>
+                <p class="p">조약돌은 이제 시원한 공기를 맞으며 눈사람의 환한 미소를</p>
+                <p class="p">완성시켜줄 것이다.</p>
+            </div>
+        	<div class="box2" style="height:69px;align-items: center;">
+             <audio controls class="g" style="width: 100%; margin-top: 6px;">
+                <source src="6.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>   
+            </div> 
+        	 <div class="box3" style="height: 249px;">
+        <div class="box" id="a" onclick="window.location.href = 'index1.html';" style="display:flex; justify-content: center; align-items: center;">
+            <img src="carrot.png" class="carrot" style="height: 120px; width: 120px;">
+        </div>
+
+        <div class="box" id="b" onclick="window.location.href = 'index2.html';" style="display:flex; justify-content: center; align-items: center;">
+            <img src="button.png" class="button" style="height: 120px; width: 120px;">
+        </div>
+
+        <div class="box" id="c" onclick="window.location.href = 'index3.html';" style="display:flex; justify-content: center; align-items: center;">
+            <img src="muffler.png" class="muffler" style="height: 120px; width: 120px;">
+        </div>
+
+        <div class="box" id="d" onclick="window.location.href = 'index4.html';" style="display:flex; justify-content: center; align-items: center;">
+            <img src="branch.png" class="branch" style="height: 120px; width: 120px;">
+        </div>
+
+        <div class="box" id="e" onclick="window.location.href = 'index5.html';" style="display:flex; justify-content: center; align-items: center;">
+            <img src="bucket.png" class="bucket" style="height: 120px; width: 120px;">
+        </div>
+
+        <div class="box" id="f" onclick="window.location.href = 'index6.html';" style="display:flex; justify-content: center; align-items: center;">
+            <img src="pebble.png" class="pebble" style="height: 120px; width: 120px;">
+        </div>
+    </div>
+        </div>
+    </div>
+
+      <canvas id='canv'></canvas>
+    
+    <script type="text/javascript">
+        var c = document.getElementById('canv'),
+            $ = c.getContext("2d");
+        var w = c.width = window.innerWidth,
+            h = c.height = window.innerHeight;
+
+        Snowy();
+
+        function Snowy() {
+            var snow, arr = [];
+            var num = 600, tsc = 1, sp = 0.5;
+            var sc = 0.8, t = 10, mv = 20, min = 1;
+            for (var i = 0; i < num; ++i) {
+                snow = new Flake();
+                snow.y = Math.random() * (h + 50);
+                snow.x = Math.random() * w;
+                snow.t = Math.random() * (Math.PI * 2);
+                snow.sz = (100 / (10 + (Math.random() * 100))) * sc;
+                snow.sp = (Math.pow(snow.sz * .8, 2) * .15) * sp;
+                snow.sp = snow.sp < min ? min : snow.sp;
+                arr.push(snow);
+            }
+            go();
+
+            function go() {
+                window.requestAnimationFrame(go);
+                $.clearRect(0, 0, w, h);
+                for (var i = 0; i < arr.length; ++i) {
+                    f = arr[i];
+                    f.t += .05;
+                    f.t = f.t >= Math.PI * 2 ? 0 : f.t;
+                    f.y += f.sp;
+                    f.x += Math.sin(f.t * tsc) * (f.sz * .3);
+                    if (f.y > h + 50) f.y = -10 - Math.random() * mv;
+                    if (f.x > w + mv) f.x = -mv;
+                    if (f.x < -mv) f.x = w + mv;
+                    f.draw();
+                }
+            }
+
+            function Flake() {
+                this.draw = function() {
+                    this.g = $.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.sz + 8);
+                    this.g.addColorStop(0, 'hsla(255,255%,255%,1)');
+                    this.g.addColorStop(1, 'hsla(255,255%,255%,0)');
+                    $.moveTo(this.x, this.y);
+                    $.fillStyle = this.g;
+                    $.beginPath();
+                    $.arc(this.x, this.y, this.sz, 0, Math.PI * 2, true);
+                    $.fill();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
